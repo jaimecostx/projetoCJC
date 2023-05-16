@@ -51,6 +51,7 @@ public class Kart : MonoBehaviour
 
         kart = GetComponent<ArcadeKart>();
     }
+    
 
     // Update is called once per frame
     void Update()
