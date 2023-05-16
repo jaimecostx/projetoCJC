@@ -10,6 +10,7 @@ public class Kart : MonoBehaviour
     // no brakes, 
     public int selectedPowerUp;
     public Renderer kartRenderer;
+
     public Renderer playerRenderer;
     public bool isPowerUpOn = false;
     Color kartDefaultColor;
@@ -42,6 +43,7 @@ public class Kart : MonoBehaviour
 
     IEnumerator ActivatePowerUp()
     {
+
         float powerUpTimer = 0;
         switch (selectedPowerUp)
         {
