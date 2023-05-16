@@ -19,9 +19,37 @@ public class Kart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        kart = GetComponent<ArcadeKart>();
+        Debug.Log(PlayerPrefs.GetString("KartColor"));
+        string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+
+        // Parse the color components to floats
+        float red = float.Parse(colorComponents[0]);
+        float green = float.Parse(colorComponents[1]);
+        float blue = float.Parse(colorComponents[2]);
+        float alpha = float.Parse(colorComponents[3]);
+
+        Debug.Log(red + " " + green + " " + blue + " " + alpha);
+
+        kartRenderer.material.color = new Color(red, green, blue, alpha);
         kartDefaultColor = kartRenderer.material.color;
+
+        Debug.Log(PlayerPrefs.GetString("PlayerColor"));
+        colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+
+        // Parse the color components to floats
+        red = float.Parse(colorComponents[0]);
+        green = float.Parse(colorComponents[1]);
+        blue = float.Parse(colorComponents[2]);
+        alpha = float.Parse(colorComponents[3]);
+
+        Debug.Log(red + " " + green + " " + blue + " " + alpha);
+
+        playerRenderer.material.color = new Color(red, green, blue, alpha);
         playerDefaultColor = playerRenderer.material.color;
+
+        Debug.Log(kartDefaultColor);
+
+        kart = GetComponent<ArcadeKart>();
     }
 
     // Update is called once per frame
