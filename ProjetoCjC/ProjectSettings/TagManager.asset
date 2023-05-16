@@ -7,6 +7,7 @@ TagManager:
   - CrashMode
   - PowerUp
   - KartAI
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

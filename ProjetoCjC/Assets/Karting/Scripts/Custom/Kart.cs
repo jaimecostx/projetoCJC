@@ -6,14 +6,18 @@ using KartGame.KartSystems;
 
 public class Kart : MonoBehaviour
 {
+    public string racerName;
     public float powerUpTime = 5;
     public string []powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
     // no brakes, 
     public int selectedPowerUp;
     public Renderer kartRenderer;
-
+    public int checkpointCounter;
     public Renderer playerRenderer;
     public bool isPowerUpOn = false;
+
+    public float lastTime;
+    float timer;
     Color kartDefaultColor;
     Color playerDefaultColor;
     ArcadeKart kart;
@@ -23,6 +27,8 @@ public class Kart : MonoBehaviour
     {
         if(gameObject.CompareTag("Player"))
         {   
+            racerName = PlayerPrefs.GetString("PlayerUsername");
+            
             Debug.Log(PlayerPrefs.GetString("KartColor"));
             string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
 
@@ -46,7 +52,7 @@ public class Kart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime; 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,6 +63,11 @@ public class Kart : MonoBehaviour
             selectedPowerUp = Random.Range(0, 3);
             Debug.Log("selectPowerup " + selectedPowerUp);
             StartCoroutine(ActivatePowerUp());
+        }
+        else if (other.CompareTag("Checkpoint"))
+        {
+            lastTime = timer;
+            checkpointCounter++;
         }
     }
 
