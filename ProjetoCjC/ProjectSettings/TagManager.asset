@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CrashMode
   - PowerUp
+  - KartAI
   layers:
   - Default
   - TransparentFX

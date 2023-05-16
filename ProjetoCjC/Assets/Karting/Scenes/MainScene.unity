@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17122526, g: 0.0695448, b: 0.15268382, a: 1}
+  m_IndirectSpecularColor: {r: 0.17122306, g: 0.069485575, b: 0.15279196, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11918,6 +11918,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5209091469546302554, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: m_TagString
+      value: KartAI
+      objectReference: {fileID: 0}
     - target: {fileID: 5209091469959198656, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: m_RootOrder
@@ -11983,6 +11988,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: KartClassic_MLAgent
       objectReference: {fileID: 0}
+    - target: {fileID: 5209091469959198663, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: m_TagString
+      value: KartAI
+      objectReference: {fileID: 0}
     - target: {fileID: 6521773912976216144, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: Colliders.Array.size
@@ -12020,6 +12030,45 @@ PrefabInstance:
       objectReference: {fileID: 862808417}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f7c5784d4776074089b56351be94b74, type: 3}
+--- !u!1 &1209063566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5209091469959198663, guid: 5f7c5784d4776074089b56351be94b74,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209063565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1209063567 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7400333761247072798, guid: 5f7c5784d4776074089b56351be94b74,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209063565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1209063568 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7400333759681822283, guid: 5f7c5784d4776074089b56351be94b74,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209063565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1209063569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209063566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpTime: 5
+  powerUps:
+  - Oil Slick
+  - Party Mode
+  - Ghost Mode
+  selectedPowerUp: 0
+  kartRenderer: {fileID: 1209063568}
+  playerRenderer: {fileID: 1209063567}
+  isPowerUpOn: 0
 --- !u!65 &1210902299 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3761431495673512402, guid: 6d9796d84c9e5a54fb4e014484945a46,

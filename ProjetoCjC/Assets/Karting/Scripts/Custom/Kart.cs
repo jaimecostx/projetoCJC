@@ -1,3 +1,4 @@
+using System.Security.AccessControl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,38 +17,27 @@ public class Kart : MonoBehaviour
     Color kartDefaultColor;
     Color playerDefaultColor;
     ArcadeKart kart;
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetString("KartColor"));
-        string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+        if(gameObject.CompareTag("Player"))
+        {   
+            Debug.Log(PlayerPrefs.GetString("KartColor"));
+            string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
 
-        // Parse the color components to floats
-        float red = float.Parse(colorComponents[0]);
-        float green = float.Parse(colorComponents[1]);
-        float blue = float.Parse(colorComponents[2]);
-        float alpha = float.Parse(colorComponents[3]);
+            kartRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
+            kartDefaultColor = kartRenderer.material.color;
 
-        Debug.Log(red + " " + green + " " + blue + " " + alpha);
+            Debug.Log(PlayerPrefs.GetString("PlayerColor"));
+            colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+            
+            playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
+            playerDefaultColor = playerRenderer.material.color;
 
-        kartRenderer.material.color = new Color(red, green, blue, alpha);
-        kartDefaultColor = kartRenderer.material.color;
-
-        Debug.Log(PlayerPrefs.GetString("PlayerColor"));
-        colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-
-        // Parse the color components to floats
-        red = float.Parse(colorComponents[0]);
-        green = float.Parse(colorComponents[1]);
-        blue = float.Parse(colorComponents[2]);
-        alpha = float.Parse(colorComponents[3]);
-
-        Debug.Log(red + " " + green + " " + blue + " " + alpha);
-
-        playerRenderer.material.color = new Color(red, green, blue, alpha);
-        playerDefaultColor = playerRenderer.material.color;
-
-        Debug.Log(kartDefaultColor);
+            Debug.Log(kartDefaultColor);
+        }
+        
 
         kart = GetComponent<ArcadeKart>();
     }

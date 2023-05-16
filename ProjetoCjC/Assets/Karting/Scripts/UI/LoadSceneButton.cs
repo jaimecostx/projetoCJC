@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Numerics;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace KartGame.UI
 {
@@ -9,7 +11,7 @@ namespace KartGame.UI
         [Tooltip("What is the name of the scene we want to load when clicking the button?")]
         public string SceneName;
 
-        public InputField username;
+        public TMP_InputField username;
 
         public void LoadTargetScene() 
         {
@@ -18,7 +20,17 @@ namespace KartGame.UI
 
         public void OnButtonClick()
         {
-            Debug.Log(username.text);
+            if (username.text == null)
+            {
+                Debug.Log("ManRacer");
+                PlayerPrefs.SetString("PlayerUsername", "ManRacer");
+            }
+            else
+            {
+                Debug.Log(username.text);
+                PlayerPrefs.SetString("PlayerUsername", username.text);
+            }
+            
         }
     }
 }
