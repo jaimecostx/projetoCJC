@@ -1,11 +1,19 @@
+using System.ComponentModel;
+using System.IO;
+using System.Transactions;
+using System.Net.Mail;
+using System.Collections.Specialized;
 using System.Security.AccessControl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using KartGame.KartSystems;
+using TMPro;
 
 public class Kart : MonoBehaviour
 {
+    public TextMeshProUGUI notification;
     public string racerName;
     public float powerUpTime = 5;
     public string []powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
@@ -20,11 +28,16 @@ public class Kart : MonoBehaviour
     float timer;
     Color kartDefaultColor;
     Color playerDefaultColor;
+    Color notificationDefaultColor;
     ArcadeKart kart;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        notification.text = "";
+        notification.enabled = false;
         if(gameObject.CompareTag("Player"))
         {   
             racerName = PlayerPrefs.GetString("PlayerUsername");
@@ -73,13 +86,15 @@ public class Kart : MonoBehaviour
 
     IEnumerator ActivatePowerUp()
     {
-
+        notification.enabled = true;
+        notification.text = powerUps[selectedPowerUp];
         float powerUpTimer = 0;
         switch (selectedPowerUp)
         {
             case 0: // Oil Slick
                 Debug.Log("No Brakes");
                 isPowerUpOn = true;
+                
                 float tempBraking = kart.baseStats.Braking; 
                 float tempSteer = kart.baseStats.Steer;
                 while (powerUpTimer <= powerUpTime)
@@ -125,7 +140,8 @@ public class Kart : MonoBehaviour
                 isPowerUpOn = false;
                 break;
         }
-
+        notification.text = "";
+        notification.enabled = true;
     }
 
 }
