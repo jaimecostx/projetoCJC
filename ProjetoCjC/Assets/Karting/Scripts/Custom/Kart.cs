@@ -16,7 +16,8 @@ public class Kart : MonoBehaviour
     public TextMeshProUGUI notification;
     public string racerName;
     public float powerUpTime = 5;
-    public string []powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
+    public string [] powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
+    public string [] npcNames = {"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
     // no brakes, 
     public int selectedPowerUp;
     public Renderer kartRenderer;
@@ -56,7 +57,12 @@ public class Kart : MonoBehaviour
 
             Debug.Log(kartDefaultColor);
         }
-        
+        else if (gameObject.CompareTag("KartAI"))
+        {
+            racerName = npcNames[Random.Range(0, 9)];
+            playerRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
+            kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
+        }
 
         kart = GetComponent<ArcadeKart>();
     }
