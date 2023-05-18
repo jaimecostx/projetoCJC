@@ -1,12 +1,22 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
 
-public class Costumize : MonoBehaviour {
+public class Costumize : MonoBehaviour 
+{
+    public CarModel carSwitcher;
 
-    public Renderer kartRenderer;
-    public Renderer playerRenderer;
+    Renderer kartRenderer;
+    Renderer playerRenderer;
+
+    public Renderer kartClassicRenderer;
+    public Renderer playerClassicRenderer;
+
+    public Renderer kartRoadsterRenderer;
+    public Renderer playerRoadsterRenderer;
 
     Color kartDefaultColor;
     Color playerDefaultColor;
@@ -15,9 +25,19 @@ public class Costumize : MonoBehaviour {
     // Load already saved character costumization
     void Start() 
     {
-       Debug.Log("start");
-       kartDefaultColor = kartRenderer.material.color;
-       playerDefaultColor = playerRenderer.material.color;
+        if (carSwitcher.currentCarIndex == 0)
+        {
+            kartRenderer = kartClassicRenderer;
+            playerRenderer = playerClassicRenderer;
+        }
+        else if (carSwitcher.currentCarIndex == 1)
+        {
+            kartRenderer = kartRoadsterRenderer;
+            playerRenderer = playerRoadsterRenderer;
+        }
+
+        kartDefaultColor = kartRenderer.material.color;
+        playerDefaultColor = playerRenderer.material.color;
 
        if (PlayerPrefs.HasKey("KartColor") && PlayerPrefs.HasKey("PlayerColor"))
        {
@@ -29,11 +49,8 @@ public class Costumize : MonoBehaviour {
             float blue = float.Parse(colorComponents[2]);
             float alpha = float.Parse(colorComponents[3]);
 
-            Debug.Log(red + " " + green + " " + blue + " " + alpha);
-
             kartRenderer.material.color = new Color(red, green, blue, alpha);
 
-            Debug.Log(PlayerPrefs.GetString("PlayerColor"));
             colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
 
             // Parse the color components to floats
@@ -41,8 +58,6 @@ public class Costumize : MonoBehaviour {
             green = float.Parse(colorComponents[1]);
             blue = float.Parse(colorComponents[2]);
             alpha = float.Parse(colorComponents[3]);
-
-            Debug.Log(red + " " + green + " " + blue + " " + alpha);
 
             playerRenderer.material.color = new Color(red, green, blue, alpha);
        }
@@ -61,7 +76,16 @@ public class Costumize : MonoBehaviour {
 
     public void OnButtonClick() 
     {
-        Debug.Log("Customize Button clicked!");
+        if (carSwitcher.currentCarIndex == 0)
+        {
+            kartRenderer = kartClassicRenderer;
+            playerRenderer = playerClassicRenderer;
+        }
+        else if (carSwitcher.currentCarIndex == 1)
+        {
+            kartRenderer = kartRoadsterRenderer;
+            playerRenderer = playerRoadsterRenderer;
+        }
         kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
         playerRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
 

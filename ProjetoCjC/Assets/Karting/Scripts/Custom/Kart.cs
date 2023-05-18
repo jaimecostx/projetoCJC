@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.IO;
 using System.Transactions;
@@ -10,6 +11,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using KartGame.KartSystems;
 using TMPro;
+using Game;
+using Cinemachine;
 
 public class Kart : MonoBehaviour
 {
@@ -20,9 +23,10 @@ public class Kart : MonoBehaviour
     public string [] npcNames = {"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
     // no brakes, 
     public int selectedPowerUp;
-    public Renderer kartRenderer;
+    Renderer kartRenderer;
+    Renderer playerRenderer;
     public int checkpointCounter;
-    public Renderer playerRenderer;
+
     public bool isPowerUpOn = false;
 
     public float lastTime;
@@ -32,15 +36,22 @@ public class Kart : MonoBehaviour
     Color notificationDefaultColor;
     ArcadeKart kart;
 
+    public CarModel carSwitcher;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        notification.text = "";
-        notification.enabled = false;
+        notification = GameObject.Find("Notification")?.GetComponent<TextMeshProUGUI>();
         if(gameObject.CompareTag("Player"))
         {   
+            //notification.enabled = false;
+
+            kartRenderer = GameObject.Find("Roadster_Body").GetComponent<Renderer>();
+            playerRenderer = GameObject.Find("Template_Character").GetComponent<Renderer>();
+
+            Debug.Log(kartRenderer.ToString());
+
             racerName = PlayerPrefs.GetString("PlayerUsername");
             
             Debug.Log(PlayerPrefs.GetString("KartColor"));
@@ -59,6 +70,8 @@ public class Kart : MonoBehaviour
         }
         else if (gameObject.CompareTag("KartAI"))
         {
+            kartRenderer = GameObject.Find("Kart_Body").GetComponent<Renderer>();
+            playerRenderer = GameObject.Find("Template_Character").GetComponent<Renderer>();
             racerName = npcNames[Random.Range(0, 9)];
             playerRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
             kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
@@ -81,7 +94,7 @@ public class Kart : MonoBehaviour
             Destroy(other.gameObject);
             selectedPowerUp = Random.Range(0, 3);
             Debug.Log("selectPowerup " + selectedPowerUp);
-            StartCoroutine(ActivatePowerUp());
+            //StartCoroutine(ActivatePowerUp());
         }
         else if (other.CompareTag("Checkpoint"))
         {
@@ -92,8 +105,8 @@ public class Kart : MonoBehaviour
 
     IEnumerator ActivatePowerUp()
     {
-        notification.enabled = true;
-        notification.text = powerUps[selectedPowerUp];
+        //notification.enabled = true;
+        //notification.text = powerUps[selectedPowerUp];
         float powerUpTimer = 0;
         switch (selectedPowerUp)
         {
@@ -146,8 +159,8 @@ public class Kart : MonoBehaviour
                 isPowerUpOn = false;
                 break;
         }
-        notification.text = "";
-        notification.enabled = true;
+        //notification.text = "";
+        //notification.enabled = true;
     }
 
 }

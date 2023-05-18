@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17122306, g: 0.069485575, b: 0.15279196, a: 1}
+  m_IndirectSpecularColor: {r: 0.17122526, g: 0.0695448, b: 0.15268382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -451,12 +451,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8f786667994ad4fee8c70a586ff5fb08, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f1e50f73a529a448b004add5bec5d80, type: 3}
---- !u!137 &64520741 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7798798856373682650, guid: 19954de30401f73428254541a9ad156e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304724375}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &68686922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3393,19 +3387,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 0}
+  notification: {fileID: 1562774462}
   racerName: Blitz
   powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
   - Ghost Mode
+  npcNames:
+  - Skippy
+  - Dash
+  - Rash
+  - Cash
+  - Soup
+  - Toup
+  - Nuns
+  - Vascz
+  - Backz
   selectedPowerUp: 0
-  kartRenderer: {fileID: 587106713}
   checkpointCounter: 0
-  playerRenderer: {fileID: 428076060}
   isPowerUpOn: 0
   lastTime: 0
+  carSwitcher: {fileID: 0}
 --- !u!1001 &304557107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5209,12 +5212,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8f786667994ad4fee8c70a586ff5fb08, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dca6189290e8c16479a364fa6d80b6b8, type: 3}
---- !u!137 &428076060 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333761247072798, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 2085399559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &433840811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 92bb9994204d1d44cb6223c53e4f84f8,
@@ -6228,12 +6225,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 582113425}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &587106713 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333759681822283, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 2085399559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &588385495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 40299501215355906, guid: 230dd9257fca2c249b555f6edd3c8e14,
@@ -6409,12 +6400,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 667086550830086704, guid: 3796997fde0c29b4180a4ec756403b34,
     type: 3}
   m_PrefabInstance: {fileID: 591490105}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &597254873 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333759681822283, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 1466349435}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &598479454 stripped
 Transform:
@@ -9000,12 +8985,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1304724376}
+      objectReference: {fileID: 0}
     - target: {fileID: 6691645748356329552, guid: 4366ba6a4d5213d4f9fc7bba3e778799,
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 1304724377}
+      objectReference: {fileID: 0}
     - target: {fileID: 6691645748356329553, guid: 4366ba6a4d5213d4f9fc7bba3e778799,
         type: 3}
       propertyPath: m_RootOrder
@@ -9079,7 +9064,6 @@ GameObject:
   - component: {fileID: 873562320}
   - component: {fileID: 873562323}
   - component: {fileID: 873562322}
-  - component: {fileID: 873562321}
   m_Layer: 5
   m_Name: PositionCanvas
   m_TagString: Untagged
@@ -9112,22 +9096,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &873562321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873562319}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 923988891dedec44e8ef297eacc10c58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLapText: {fileID: 0}
-  bestLapText: {fileID: 0}
-  timeDisplayItem: {fileID: 11400000, guid: 662878078edcd354991f5fbb8c48cb2e, type: 2}
-  finishedLapsParent: {fileID: 8979331}
 --- !u!114 &873562322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10389,12 +10357,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 230dd9257fca2c249b555f6edd3c8e14, type: 3}
---- !u!137 &1005249434 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333761247072798, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 1466349435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1006557885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 667086550830086704, guid: 3796997fde0c29b4180a4ec756403b34,
@@ -10736,6 +10698,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1016630477}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1042836611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6691645748356329552, guid: 4366ba6a4d5213d4f9fc7bba3e778799,
+    type: 3}
+  m_PrefabInstance: {fileID: 867987756}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1043737004
 GameObject:
   m_ObjectHideFlags: 0
@@ -12335,7 +12309,19 @@ MonoBehaviour:
       m_Calls: []
   m_CameraActivatedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1244580569}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!81 &1207105317
 AudioListener:
   m_ObjectHideFlags: 0
@@ -12560,18 +12546,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1209063565}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &1209063567 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333761247072798, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 1209063565}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1209063568 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7400333759681822283, guid: 5f7c5784d4776074089b56351be94b74,
-    type: 3}
-  m_PrefabInstance: {fileID: 1209063565}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1209063569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12584,19 +12558,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 0}
+  notification: {fileID: 1562774462}
   racerName: Dash
   powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
   - Ghost Mode
+  npcNames:
+  - Skippy
+  - Dash
+  - Rash
+  - Cash
+  - Soup
+  - Toup
+  - Nuns
+  - Vascz
+  - Backz
   selectedPowerUp: 0
-  kartRenderer: {fileID: 1209063568}
   checkpointCounter: 0
-  playerRenderer: {fileID: 1209063567}
   isPowerUpOn: 0
   lastTime: 0
+  carSwitcher: {fileID: 0}
 --- !u!65 &1210902299 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3761431495673512402, guid: 6d9796d84c9e5a54fb4e014484945a46,
@@ -12793,6 +12776,55 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 148eef3fd1efb4869a34ac3d7cf100cc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0829d76c4806eb54b8b2f17eec10f4e6, type: 3}
+--- !u!1 &1244580569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1244580571}
+  - component: {fileID: 1244580570}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1244580570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244580569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2519cb6ba77b1a4992caebeb365e1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartClassic: {fileID: 4810912518991602691, guid: 19954de30401f73428254541a9ad156e,
+    type: 3}
+  kartRoadster: {fileID: 188030281043199902, guid: 66030baed8e969a45a0d327d35c432c3,
+    type: 3}
+  camera: {fileID: 1042836611}
+--- !u!4 &1244580571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244580569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.29832458, y: 0.6365992, z: -3.1050637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1268325793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13388,92 +13420,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9f1e50f73a529a448b004add5bec5d80,
     type: 3}
   m_PrefabInstance: {fileID: 1562696022}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1304724375
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4810912518991602691, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_Name
-      value: KartClassic_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4810912518991602694, guid: 19954de30401f73428254541a9ad156e,
-        type: 3}
-      propertyPath: baseStats.TopSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19954de30401f73428254541a9ad156e, type: 3}
---- !u!4 &1304724376 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4810912518991602692, guid: 19954de30401f73428254541a9ad156e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304724375}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1304724377 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4810912518023495569, guid: 19954de30401f73428254541a9ad156e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304724375}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1332395070 stripped
 Transform:
@@ -15333,6 +15279,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925218798517979066, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: playerRoadsterRenderer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5209091469546302554, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: m_TagString
@@ -18221,12 +18172,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6d356d20182e04a549044c49cf2448e2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92bb9994204d1d44cb6223c53e4f84f8, type: 3}
---- !u!137 &1685632079 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7798798854743944591, guid: 19954de30401f73428254541a9ad156e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304724375}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1687223860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19941,19 +19886,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 0}
+  notification: {fileID: 1562774462}
   racerName: Skippy
   powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
   - Ghost Mode
+  npcNames:
+  - Skippy
+  - Dash
+  - Rash
+  - Cash
+  - Soup
+  - Toup
+  - Nuns
+  - Vascz
+  - Backz
   selectedPowerUp: 0
-  kartRenderer: {fileID: 597254873}
   checkpointCounter: 0
-  playerRenderer: {fileID: 1005249434}
   isPowerUpOn: 0
   lastTime: 0
+  carSwitcher: {fileID: 0}
 --- !u!4 &1819256880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 667086550830086704, guid: 3796997fde0c29b4180a4ec756403b34,
@@ -20591,12 +20545,12 @@ MonoBehaviour:
   - {fileID: 1938616863}
   - {fileID: 1878019409}
   racers:
-  - {fileID: 1910917303}
+  - {fileID: 0}
   - {fileID: 1816401845}
   - {fileID: 1209063569}
   - {fileID: 302482492}
   racersPositions:
-  - {fileID: 1910917303}
+  - {fileID: 0}
   - {fileID: 1816401845}
   - {fileID: 1209063569}
   - {fileID: 302482492}
@@ -20718,50 +20672,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 943674754}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1910917296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4810912518991602691, guid: 19954de30401f73428254541a9ad156e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304724375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1910917297
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910917296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8534e17a0f90604c9afd4f5c73d829f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Id: 1e015b90-7713-408c-8d9a-3a4586f0f423
---- !u!114 &1910917303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910917296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notification: {fileID: 1562774462}
-  racerName: 
-  powerUpTime: 3
-  powerUps:
-  - Oil Slick
-  - Party Mode
-  - Ghost Mode
-  selectedPowerUp: 0
-  kartRenderer: {fileID: 1685632079}
-  checkpointCounter: 0
-  playerRenderer: {fileID: 64520741}
-  isPowerUpOn: 0
-  lastTime: 0
 --- !u!1001 &1927735327
 PrefabInstance:
   m_ObjectHideFlags: 0
