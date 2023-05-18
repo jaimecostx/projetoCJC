@@ -13,14 +13,6 @@ public class CarModel : MonoBehaviour
     void Start()
     {
         carPrefabs[currentCarIndex].SetActive(true);
-        for (int i = 0; i < carPrefabs.Length; i++)
-        {
-            if (i != currentCarIndex)
-            {
-                carPrefabs[currentCarIndex].SetActive(false);
-            }
-        }
-
     }
 
     // Update is called once per frame
@@ -42,7 +34,6 @@ public class CarModel : MonoBehaviour
 
         Debug.Log("CarModel" + currentCarIndex);
         PlayerPrefs.SetString("CarModel", currentCarIndex.ToString());
-        
     }
 }
 
