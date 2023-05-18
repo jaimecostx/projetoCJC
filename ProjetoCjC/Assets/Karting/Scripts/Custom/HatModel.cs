@@ -20,13 +20,15 @@ namespace Game{
         /// </summary>
         void Start()
         {
-            if (PlayerPrefs.GetString("CarModel") == "0")
-            {
-                headEND = classicHeadEND;
-            }
-            else if (PlayerPrefs.GetString("CarModel") == "1")
+            headEND = roadsterHeadEND;
+            Debug.Log("HatMode.cs - Start()");
+            if (PlayerPrefs.GetInt("CarModel") == 0)
             {
                 headEND = roadsterHeadEND;
+            }
+            else if (PlayerPrefs.GetInt("CarModel") == 1)
+            {
+                headEND = classicHeadEND;
             }
         }
 
@@ -38,24 +40,26 @@ namespace Game{
 
         public void OnButtonClick()
         {
-            if (PlayerPrefs.GetString("CarModel") == "0")
-            {
-                headEND = classicHeadEND;
-            }
-            else if (PlayerPrefs.GetString("CarModel") == "1")
+            Debug.Log("HatMode.cs - OnButtonClick()");
+            if (PlayerPrefs.GetInt("CarModel") == 0)
             {
                 headEND = roadsterHeadEND;
             }
+            else if (PlayerPrefs.GetInt("CarModel") == 1)
+            {
+                headEND = classicHeadEND;
+            }
 
-            hatCycle();
+            HatCycle();
         }
 
         /// <summary>
         /// hatCycle method handles the logic for cycling through hatPrefabs and instantiating the selected hat.
         /// It also manages destroying the previous hat instance and updating PlayerPrefs with the current hat index.
         /// </summary>
-        void hatCycle ()
+        void HatCycle ()
         {
+            Debug.Log("HatMode.cs - HatCycle()");
             if (hatInstance != null)
             {
                 Destroy(hatInstance);

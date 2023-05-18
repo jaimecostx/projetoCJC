@@ -8,8 +8,10 @@ namespace Game{
 public class CarModel : MonoBehaviour
 {
     public GameObject[] carPrefabs;
+    // 0 - Roadster 1 - Classic
     public int currentCarIndex = 0;
     // Start is called before the first frame update
+    public GameObject carModel;
     void Start()
     {
         carPrefabs[currentCarIndex].SetActive(true);
@@ -31,9 +33,9 @@ public class CarModel : MonoBehaviour
 
         // Enable the next car
         carPrefabs[currentCarIndex].SetActive(true);
+        carModel = carPrefabs[currentCarIndex];
 
-        Debug.Log("CarModel" + currentCarIndex);
-        PlayerPrefs.SetString("CarModel", currentCarIndex.ToString());
+        PlayerPrefs.SetInt("CarModel", currentCarIndex);
     }
 }
 
