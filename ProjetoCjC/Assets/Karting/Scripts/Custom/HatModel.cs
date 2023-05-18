@@ -68,13 +68,18 @@ namespace Game{
             currentHatIndex = (currentHatIndex + 1) % (hatPrefabs.Length+1);
 
             if (currentHatIndex != hatPrefabs.Length){
-                hatInstance = Instantiate(hatPrefabs[currentHatIndex]);
-                hatInstance.transform.position = headEND.transform.position;
-                hatInstance.transform.rotation = headEND.transform.rotation;
-                hatInstance.transform.localScale = new Vector3(2f, 2f, 2f);
-                hatInstance.transform.SetParent(headEND.transform);
+                AddHat(currentHatIndex);
             }
             PlayerPrefs.SetInt("HatModel", currentHatIndex);
+        }
+
+        public void AddHat(int hatIndex)
+        {
+            hatInstance = Instantiate(hatPrefabs[hatIndex]);
+            hatInstance.transform.position = headEND.transform.position;
+            hatInstance.transform.rotation = headEND.transform.rotation;
+            hatInstance.transform.localScale = new Vector3(2f, 2f, 2f);
+            hatInstance.transform.SetParent(headEND.transform);
         }
     }
 }
