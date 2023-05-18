@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 public class ToggleGameObjectButton : MonoBehaviour
 {
     public GameObject objectToToggle;
-    public GameObject mainScenekart;
+    public GameObject mainScenekart1;
+    public GameObject mainScenekart2;
     public bool resetSelectionAfterClick;
 
     void Update()
@@ -19,8 +20,10 @@ public class ToggleGameObjectButton : MonoBehaviour
     {
         objectToToggle.SetActive(active);
 
-        if (mainScenekart != null)
-            mainScenekart.SetActive(!active);
+        if (mainScenekart1 != null)
+            mainScenekart1.SetActive(!active);
+        if (mainScenekart2 != null)
+            mainScenekart2.SetActive(!active);
 
         if (resetSelectionAfterClick)
             EventSystem.current.SetSelectedGameObject(null);
