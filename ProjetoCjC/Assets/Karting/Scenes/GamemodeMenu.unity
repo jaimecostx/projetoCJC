@@ -358,8 +358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e45df568fc8b547b7d0829cb0630d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kartRenderer: {fileID: 0}
-  playerRenderer: {fileID: 0}
+  carSwitcher: {fileID: 0}
+  kartClassicRenderer: {fileID: 0}
+  playerClassicRenderer: {fileID: 0}
+  kartRoadsterRenderer: {fileID: 0}
+  playerRoadsterRenderer: {fileID: 0}
 --- !u!114 &338441723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,7 +606,7 @@ GameObject:
   - component: {fileID: 434893882}
   - component: {fileID: 434893881}
   - component: {fileID: 434893880}
-  - component: {fileID: 434893879}
+  - component: {fileID: 434893884}
   m_Layer: 5
   m_Name: ControlsButton
   m_TagString: Untagged
@@ -611,21 +614,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &434893879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434893878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb6064e92765a4553ad8e16f2d386db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToToggle: {fileID: 1123040292}
-  mainScenekart: {fileID: 0}
-  resetSelectionAfterClick: 0
 --- !u!114 &434893880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,22 +658,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434893879}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SetGameObjectActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 434893884}
+        m_TargetAssemblyTypeName: KartGame.UI.LoadSceneButton, KartGame
+        m_MethodName: LoadTargetScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -753,6 +729,20 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 230}
   m_SizeDelta: {x: 280, y: 70}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &434893884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434893878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb0be89f0d0b38469396506a9e54beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: MainScene
+  username: {fileID: 0}
 --- !u!1 &616903498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,7 +1674,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434893879}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: SetGameObjectActive
         m_Mode: 6
@@ -1822,18 +1812,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1834445077}
-        m_TargetAssemblyTypeName: KartGame.UI.LoadSceneButton, KartGame
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1834445077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,7 +1824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb0be89f0d0b38469396506a9e54beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: MainScene
+  SceneName: LapScene
   username: {fileID: 0}
 --- !u!114 &1834445078
 MonoBehaviour:

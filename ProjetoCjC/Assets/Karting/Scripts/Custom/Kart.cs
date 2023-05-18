@@ -16,12 +16,13 @@ using Cinemachine;
 
 public class Kart : MonoBehaviour
 {
+    public string [] powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
+    public string [] npcNames = {"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
+
     public TextMeshProUGUI notification;
     public string racerName;
     public float powerUpTime = 5;
-    public string [] powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
-    public string [] npcNames = {"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
-    // no brakes, 
+
     public int selectedPowerUp;
     Renderer kartRenderer;
     Renderer playerRenderer;
@@ -42,41 +43,37 @@ public class Kart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        notification = GameObject.Find("Notification")?.GetComponent<TextMeshProUGUI>();
-        if(gameObject.CompareTag("Player"))
-        {   
-            //notification.enabled = false;
-
-            kartRenderer = GameObject.Find("Roadster_Body").GetComponent<Renderer>();
-            playerRenderer = GameObject.Find("Template_Character").GetComponent<Renderer>();
-
-            Debug.Log(kartRenderer.ToString());
-
+        if (gameObject.CompareTag("Player"))
+        {
             racerName = PlayerPrefs.GetString("PlayerUsername");
-            
-            Debug.Log(PlayerPrefs.GetString("KartColor"));
+            if (PlayerPrefs.GetString("CarModel") == "1")
+            {
+                kartRenderer = gameObject.transform.Find("KartBody/Roadster_Body/Roadster_Body").GetComponent<Renderer>();
+                playerRenderer = gameObject.transform.Find("KartBody/PlayerIdle/Template_Character").GetComponent<Renderer>();
+                
+            }
+            else if (PlayerPrefs.GetString("CarModel") == "0")
+            {
+                kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
+                playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
+            }
             string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-
             kartRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            kartDefaultColor = kartRenderer.material.color;
-
-            Debug.Log(PlayerPrefs.GetString("PlayerColor"));
+            
             colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
             
             playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            playerDefaultColor = playerRenderer.material.color;
-
-            Debug.Log(kartDefaultColor);
         }
         else if (gameObject.CompareTag("KartAI"))
         {
-            kartRenderer = GameObject.Find("Kart_Body").GetComponent<Renderer>();
-            playerRenderer = GameObject.Find("Template_Character").GetComponent<Renderer>();
             racerName = npcNames[Random.Range(0, 9)];
+            kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
+            playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
             playerRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
             kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
         }
-
+        kartDefaultColor = kartRenderer.material.color;
+        playerDefaultColor = playerRenderer.material.color;
         kart = GetComponent<ArcadeKart>();
     }
     
@@ -94,7 +91,7 @@ public class Kart : MonoBehaviour
             Destroy(other.gameObject);
             selectedPowerUp = Random.Range(0, 3);
             Debug.Log("selectPowerup " + selectedPowerUp);
-            //StartCoroutine(ActivatePowerUp());
+            StartCoroutine(ActivatePowerUp());
         }
         else if (other.CompareTag("Checkpoint"))
         {

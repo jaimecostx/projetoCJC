@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,12 +18,13 @@ public class Instantiate : MonoBehaviour
     void Start()
     {   
         GameObject kart;
-
+        PlayerPrefs.SetString("CarModel", "1");
         Debug.Log("Instantiate" + PlayerPrefs.GetString("CarModel"));
         if (PlayerPrefs.GetString("CarModel") == "1")
         {
             // Instantiate the kartRoadster prefab at a specific position and rotation
             kart = Instantiate(kartRoadster, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
+            kart.tag = "Player";
             // Set the camera to follow the kart's transform
             camera.Follow = kart.transform;
             // Set the camera to look at the KartBouncingCapsule child object within the kart
@@ -35,6 +35,7 @@ public class Instantiate : MonoBehaviour
         else
         {
             kart = Instantiate(kartClassic, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
+            kart.tag = "Player";
             camera.Follow = kart.transform;
             camera.LookAt = kart.transform.Find("KartBouncingCapsule");
             kart.AddComponent<Kart>();

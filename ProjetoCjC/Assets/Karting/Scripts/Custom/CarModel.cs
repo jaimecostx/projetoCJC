@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,15 @@ public class CarModel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentCarIndex = 0;
+        carPrefabs[currentCarIndex].SetActive(true);
+        for (int i = 0; i < carPrefabs.Length; i++)
+        {
+            if (i != currentCarIndex)
+            {
+                carPrefabs[currentCarIndex].SetActive(false);
+            }
+        }
+
     }
 
     // Update is called once per frame
