@@ -46,23 +46,28 @@ public class Kart : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             racerName = PlayerPrefs.GetString("PlayerUsername");
-            if (PlayerPrefs.GetString("CarModel") == "1")
+            if (PlayerPrefs.GetInt("CarModel") == 0)
             {
                 kartRenderer = gameObject.transform.Find("KartBody/Roadster_Body/Roadster_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartBody/PlayerIdle/Template_Character").GetComponent<Renderer>();
                 
             }
-            else if (PlayerPrefs.GetString("CarModel") == "0")
+            else if (PlayerPrefs.GetInt("CarModel") == 1)
             {
                 kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
             }
-            string[] colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-            kartRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            
-            colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-            
-            playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
+            string [] colorComponents;
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString("KartColor")))
+            {
+                colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+                kartRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
+            }
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString("PlayerColor")))
+            {
+                colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+                playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
+            }
         }
         else if (gameObject.CompareTag("KartAI"))
         {
