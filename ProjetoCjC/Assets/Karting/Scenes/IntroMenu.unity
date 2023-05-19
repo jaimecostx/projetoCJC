@@ -4679,7 +4679,6 @@ GameObject:
   - component: {fileID: 1133252415}
   - component: {fileID: 1133252414}
   - component: {fileID: 1133252413}
-  - component: {fileID: 1133252416}
   - component: {fileID: 1133252417}
   m_Layer: 5
   m_Name: CharacterButton
@@ -4803,23 +4802,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133252411}
   m_CullTransparentMesh: 1
---- !u!114 &1133252416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133252411}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e45df568fc8b547b7d0829cb0630d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carSwitcher: {fileID: 1422220646}
-  kartClassicRenderer: {fileID: 0}
-  playerClassicRenderer: {fileID: 0}
-  kartRoadsterRenderer: {fileID: 1718028848}
-  playerRoadsterRenderer: {fileID: 322056689}
 --- !u!114 &1133252417
 MonoBehaviour:
   m_ObjectHideFlags: 0

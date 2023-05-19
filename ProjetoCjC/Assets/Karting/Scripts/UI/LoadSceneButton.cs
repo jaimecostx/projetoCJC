@@ -20,7 +20,7 @@ namespace KartGame.UI
 
         public void OnButtonClick()
         {
-            if (username.text == null)
+            if (string.IsNullOrEmpty(username.text))
             {
                 Debug.Log("ManRacer");
                 PlayerPrefs.SetString("PlayerUsername", "ManRacer");
@@ -30,6 +30,14 @@ namespace KartGame.UI
                 Debug.Log(username.text);
                 PlayerPrefs.SetString("PlayerUsername", username.text);
             }
+
+            // PlayerPrefs.Save();
+            
+            Debug.Log("Username: " + PlayerPrefs.GetString("PlayerUsername"));
+            Debug.Log("PColor: " + PlayerPrefs.GetString("PlayerColor"));
+            Debug.Log("CModel: " + PlayerPrefs.GetInt("CarModel"));
+            Debug.Log("CColor: " + PlayerPrefs.GetString("KartColor"));
+            Debug.Log("HModel: " + PlayerPrefs.GetInt("HatModel"));
             
         }
     }

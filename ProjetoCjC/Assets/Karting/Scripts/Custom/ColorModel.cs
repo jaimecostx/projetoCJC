@@ -27,6 +27,8 @@ namespace Game{
         
         void Start() 
         {
+            
+
             colors.Add("RedButton", Color.red);
             colors.Add("BlueButton", Color.blue);
             // colors.Add("GreenButton", new Color(0f, 0.5f, 0f)); // mudar fica invisivel

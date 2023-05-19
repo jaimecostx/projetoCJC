@@ -20,6 +20,7 @@ namespace Game{
         /// </summary>
         void Start()
         {
+            
             headEND = roadsterHeadEND;
             Debug.Log("HatMode.cs - Start()");
             if (PlayerPrefs.GetInt("CarModel") == 0)

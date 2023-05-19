@@ -8,6 +8,7 @@ public class ToggleGameObjectButton : MonoBehaviour
     public GameObject mainScenekart2;
     public bool resetSelectionAfterClick;
     public GameObject kartPlayer;
+    int timesClicked = 0;
 
     void Update()
     {

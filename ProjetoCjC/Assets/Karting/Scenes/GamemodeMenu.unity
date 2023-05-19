@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802835, g: 0.22571439, b: 0.30692187, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028408, g: 0.2257152, b: 0.3069231, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -317,7 +317,6 @@ GameObject:
   - component: {fileID: 338441725}
   - component: {fileID: 338441724}
   - component: {fileID: 338441723}
-  - component: {fileID: 338441722}
   m_Layer: 5
   m_Name: CostumizeButton
   m_TagString: Untagged
@@ -346,23 +345,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: -130}
   m_SizeDelta: {x: 280, y: 70}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &338441722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338441720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e45df568fc8b547b7d0829cb0630d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carSwitcher: {fileID: 0}
-  kartClassicRenderer: {fileID: 0}
-  playerClassicRenderer: {fileID: 0}
-  kartRoadsterRenderer: {fileID: 0}
-  playerRoadsterRenderer: {fileID: 0}
 --- !u!114 &338441723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +389,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 338441722}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Costumize, KartGame
         m_MethodName: OnButtonClick
         m_Mode: 1
