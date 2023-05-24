@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 public class Instantiate : MonoBehaviour
 {
     public GameObject kartClassic;
     public GameObject kartRoadster;
+    public TextMeshProUGUI notification;
     Kart player;
     public CinemachineVirtualCamera camera;
 
@@ -30,7 +32,8 @@ public class Instantiate : MonoBehaviour
             // Set the camera to look at the KartBouncingCapsule child object within the kart
             camera.LookAt = kart.transform.Find("KartBouncingCapsule");
             // Add the Kart Script component to the kart object
-            player = kart.AddComponent<Kart>();     
+            player = kart.AddComponent<Kart>();
+            player.notification = notification;
         }
         else
         {
@@ -38,7 +41,8 @@ public class Instantiate : MonoBehaviour
             kart.tag = "Player";
             camera.Follow = kart.transform;
             camera.LookAt = kart.transform.Find("KartBouncingCapsule");
-            player = kart.AddComponent<Kart>();    
+            player = kart.AddComponent<Kart>();
+            player.notification = notification;
         }
 
     }
@@ -47,4 +51,5 @@ public class Instantiate : MonoBehaviour
     {
         
     }
+
 }

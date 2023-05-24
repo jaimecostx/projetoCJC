@@ -12955,6 +12955,7 @@ MonoBehaviour:
     type: 3}
   kartRoadster: {fileID: 188030281043199902, guid: 66030baed8e969a45a0d327d35c432c3,
     type: 3}
+  notification: {fileID: 1108712494}
   camera: {fileID: 1124594021}
 --- !u!1001 &1311427662
 PrefabInstance:

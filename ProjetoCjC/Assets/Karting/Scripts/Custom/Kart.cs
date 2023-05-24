@@ -52,7 +52,7 @@ public class Kart : MonoBehaviour
             {
                 raceController.racers.Insert(0, this);
                 raceController.racersPositions.Insert(0, this);
-            }  
+            }   
         }        
     }
 
@@ -65,7 +65,6 @@ public class Kart : MonoBehaviour
             {
                 kartRenderer = gameObject.transform.Find("KartBody/Roadster_Body/Roadster_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartBody/PlayerIdle/Template_Character").GetComponent<Renderer>();
-                
             }
             else if (PlayerPrefs.GetInt("CarModel") == 1)
             {
@@ -95,6 +94,7 @@ public class Kart : MonoBehaviour
         kartDefaultColor = kartRenderer.material.color;
         playerDefaultColor = playerRenderer.material.color;
         kart = GetComponent<ArcadeKart>();
+        notification.enabled = false; 
     }
     
 
@@ -106,6 +106,7 @@ public class Kart : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //notification.text = "ass";
         if (other.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
@@ -115,17 +116,18 @@ public class Kart : MonoBehaviour
         }
         else if (other.CompareTag("Checkpoint"))
         {
-            if (other.gameObject == lastCheckpoint) {return;}
-            lastCheckpoint = other.gameObject;
-            lastTime = timer;
-            checkpointCounter++;
+            if (other.gameObject != lastCheckpoint) {
+                lastCheckpoint = other.gameObject;
+                lastTime = timer;
+                checkpointCounter++;
+            }
         }
     }
 
     IEnumerator ActivatePowerUp()
     {
-        //notification.enabled = true;
-        //notification.text = powerUps[selectedPowerUp];
+        notification.enabled = true;
+        notification.text = powerUps[selectedPowerUp];
         float powerUpTimer = 0;
         switch (selectedPowerUp)
         {
@@ -178,8 +180,7 @@ public class Kart : MonoBehaviour
                 isPowerUpOn = false;
                 break;
         }
-        //notification.text = "";
-        //notification.enabled = true;
+        notification.text = "";
     }
         void displayDebug()
         {
