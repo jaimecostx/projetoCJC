@@ -72,6 +72,7 @@ namespace Game{
                 AddHat(currentHatIndex);
             }
             PlayerPrefs.SetInt("HatModel", currentHatIndex);
+            PlayerPrefs.Save();
         }
 
         public void AddHat(int hatIndex)

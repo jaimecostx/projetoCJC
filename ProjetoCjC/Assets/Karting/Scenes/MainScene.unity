@@ -3387,9 +3387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 1562774462}
-  racerName: Blitz
-  powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
@@ -3404,6 +3401,9 @@ MonoBehaviour:
   - Nuns
   - Vascz
   - Backz
+  notification: {fileID: 1562774462}
+  racerName: Blitz
+  powerUpTime: 5
   selectedPowerUp: 0
   checkpointCounter: 0
   isPowerUpOn: 0
@@ -12428,6 +12428,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925218798517979066, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5209091469546302554, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: m_TagString
@@ -12558,9 +12563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 1562774462}
-  racerName: Dash
-  powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
@@ -12575,6 +12577,9 @@ MonoBehaviour:
   - Nuns
   - Vascz
   - Backz
+  notification: {fileID: 1562774462}
+  racerName: Dash
+  powerUpTime: 5
   selectedPowerUp: 0
   checkpointCounter: 0
   isPowerUpOn: 0
@@ -15279,6 +15284,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925218798517979066, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1925218798517979066, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: playerRoadsterRenderer
@@ -19886,9 +19896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ceb711e88f2994aa420fcbc5bbeca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: {fileID: 1562774462}
-  racerName: Skippy
-  powerUpTime: 5
   powerUps:
   - Oil Slick
   - Party Mode
@@ -19903,6 +19910,9 @@ MonoBehaviour:
   - Nuns
   - Vascz
   - Backz
+  notification: {fileID: 1562774462}
+  racerName: Skippy
+  powerUpTime: 5
   selectedPowerUp: 0
   checkpointCounter: 0
   isPowerUpOn: 0
@@ -21749,6 +21759,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925218798517979066, guid: 5f7c5784d4776074089b56351be94b74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5209091469546302554, guid: 5f7c5784d4776074089b56351be94b74,
         type: 3}
       propertyPath: m_TagString

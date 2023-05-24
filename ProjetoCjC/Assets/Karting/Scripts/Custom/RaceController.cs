@@ -16,10 +16,10 @@ public class RaceController : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //SetPositionsText();
-        //InvokeRepeating("UpdatePositions", 0.5f, 0.5f);
+        SetPositionsText();
+        InvokeRepeating("UpdatePositions", 0.5f, 0.5f);
     }
-
+        
     // Update is called once per frame
     void Update()
     {
@@ -28,8 +28,8 @@ public class RaceController : MonoBehaviour
 
     void UpdatePositions()
     {
-        //racersPositions = racers.OrderByDescending(racer => racer.checkpointCounter).ThenBy(racer => racer.lastTime).ToList();
-        //SetPositionsText();
+        racersPositions = racers.OrderByDescending(racer => racer.checkpointCounter).ThenBy(racer => racer.lastTime).ToList();
+        SetPositionsText();
     }
 
     void SetPositionsText()

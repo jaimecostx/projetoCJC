@@ -15,7 +15,17 @@ namespace KartGame.UI
 
         public void LoadTargetScene() 
         {
+            if (SceneName == "IntroMenu")
+            {
+                PlayerPrefs.SetInt("HatModel", 0);
+                PlayerPrefs.SetInt("CarModel", 0);
+                PlayerPrefs.SetString("PlayerColor", "");
+                PlayerPrefs.SetString("PlayerUsername", "");
+                PlayerPrefs.SetString("KartColor", "");
+            }
             SceneManager.LoadSceneAsync(SceneName);
+            Debug.Log("===== " + SceneName + " =====");
+            displayDebug();
         }
 
         public void OnButtonClick()
@@ -24,21 +34,24 @@ namespace KartGame.UI
             {
                 Debug.Log("ManRacer");
                 PlayerPrefs.SetString("PlayerUsername", "ManRacer");
+                PlayerPrefs.Save();
             }
             else
             {
                 Debug.Log(username.text);
                 PlayerPrefs.SetString("PlayerUsername", username.text);
-            }
+                PlayerPrefs.Save();
+            }            
+            displayDebug();
+        }
 
-            // PlayerPrefs.Save();
-            
+        void displayDebug()
+        {
             Debug.Log("Username: " + PlayerPrefs.GetString("PlayerUsername"));
             Debug.Log("PColor: " + PlayerPrefs.GetString("PlayerColor"));
             Debug.Log("CModel: " + PlayerPrefs.GetInt("CarModel"));
             Debug.Log("CColor: " + PlayerPrefs.GetString("KartColor"));
             Debug.Log("HModel: " + PlayerPrefs.GetInt("HatModel"));
-            
         }
     }
 }

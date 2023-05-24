@@ -27,6 +27,7 @@ public class Kart : MonoBehaviour
     Renderer kartRenderer;
     Renderer playerRenderer;
     public int checkpointCounter;
+    GameObject lastCheckpoint;
 
     public bool isPowerUpOn = false;
 
@@ -41,10 +42,24 @@ public class Kart : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake() 
     {
         if (gameObject.CompareTag("Player"))
         {
+            racerName = PlayerPrefs.GetString("PlayerUsername");
+            RaceController raceController = FindObjectOfType<RaceController>();
+            if (raceController != null)
+            {
+                raceController.racers.Insert(0, this);
+                raceController.racersPositions.Insert(0, this);
+            }  
+        }        
+    }
+
+    void Start()
+    {
+        if (gameObject.CompareTag("Player"))
+        {   
             racerName = PlayerPrefs.GetString("PlayerUsername");
             if (PlayerPrefs.GetInt("CarModel") == 0)
             {
@@ -67,7 +82,7 @@ public class Kart : MonoBehaviour
             {
                 colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
                 playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            }
+            }  
         }
         else if (gameObject.CompareTag("KartAI"))
         {
@@ -100,6 +115,8 @@ public class Kart : MonoBehaviour
         }
         else if (other.CompareTag("Checkpoint"))
         {
+            if (other.gameObject == lastCheckpoint) {return;}
+            lastCheckpoint = other.gameObject;
             lastTime = timer;
             checkpointCounter++;
         }
@@ -164,5 +181,14 @@ public class Kart : MonoBehaviour
         //notification.text = "";
         //notification.enabled = true;
     }
-
+        void displayDebug()
+        {
+            Debug.LogWarning("====================================================");
+            Debug.LogWarning("Username: " + PlayerPrefs.GetString("PlayerUsername"));
+            Debug.LogWarning("PColor: " + PlayerPrefs.GetString("PlayerColor"));
+            Debug.LogWarning("CModel: " + PlayerPrefs.GetInt("CarModel"));
+            Debug.LogWarning("CColor: " + PlayerPrefs.GetString("KartColor"));
+            Debug.LogWarning("HModel: " + PlayerPrefs.GetInt("HatModel"));
+            Debug.LogWarning("====================================================");
+        }
 }

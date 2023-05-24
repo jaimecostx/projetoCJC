@@ -8,11 +8,6 @@ public class MenuNavigation : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetInt("HatModel", 0);
-        PlayerPrefs.SetInt("CarModel", 0);
-        PlayerPrefs.SetString("PlayerColor", "");
-        PlayerPrefs.SetString("PlayerUsername", "");
-        PlayerPrefs.SetString("KartColor", "");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(null);

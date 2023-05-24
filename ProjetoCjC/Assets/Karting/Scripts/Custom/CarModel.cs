@@ -36,6 +36,7 @@ public class CarModel : MonoBehaviour
         carModel = carPrefabs[currentCarIndex];
 
         PlayerPrefs.SetInt("CarModel", currentCarIndex);
+        PlayerPrefs.Save();
     }
 }
 

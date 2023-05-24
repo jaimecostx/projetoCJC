@@ -27,8 +27,6 @@ namespace Game{
         
         void Start() 
         {
-            
-
             colors.Add("RedButton", Color.red);
             colors.Add("BlueButton", Color.blue);
             // colors.Add("GreenButton", new Color(0f, 0.5f, 0f)); // mudar fica invisivel
@@ -39,8 +37,6 @@ namespace Game{
             colors.Add("WhiteButton", new Color(1f, 1f, 1f));
             colors.Add("PurpleButton", new Color(0.5f, 0f, 0.5f));
             colors.Add("BlackButton", Color.black);
-
-            //LoadSavedColors();
         }
 
     
@@ -48,7 +44,7 @@ namespace Game{
         {
             if (model == "Car")
             {
-                Debug.Log("ColorModel - OnButtonClick() - Model Car");
+                Debug.Log("ColorModel - OnButtonClick() - Model Car " + PlayerPrefs.GetInt("CarModel"));
                 if (PlayerPrefs.GetInt("CarModel") == 0)
                 {
                     modelRenderer = kartRoadsterRenderer;
@@ -61,10 +57,12 @@ namespace Game{
                 colors.TryGetValue(gameObject.name, out temp);
                 modelRenderer.material.color = temp;
                 PlayerPrefs.SetString("KartColor", modelRenderer.material.color.ToString());
+                PlayerPrefs.Save();
+                Debug.Log("ColorModel - OnButtonClick() - Model Car " + PlayerPrefs.GetString("KartColor"));
             }
             if (model == "Player")
             {
-                Debug.Log("ColorModel - OnButtonClick() - Player Car");
+                Debug.Log("ColorModel - OnButtonClick() - Player Car " + PlayerPrefs.GetInt("CarModel"));
                 if (PlayerPrefs.GetInt("CarModel") == 0)
                 {
                     modelRenderer = playerRoadsterRenderer;
@@ -77,45 +75,9 @@ namespace Game{
                 colors.TryGetValue(gameObject.name, out temp);
                 modelRenderer.material.color = temp;
                 PlayerPrefs.SetString("PlayerColor", modelRenderer.material.color.ToString());
+                PlayerPrefs.Save();
+                Debug.Log("ColorModel - OnButtonClick() - Player Car " + PlayerPrefs.GetString("PlayerColor"));
             }            
-        }
-
-        public void LoadSavedColors()
-        {
-            string [] colorComponents;
-            if (PlayerPrefs.GetInt("CarModel") != null && PlayerPrefs.GetString("KartColor") != null)
-            {
-                if (PlayerPrefs.GetInt("CarModel") == 0)
-                {
-                    modelRenderer = kartRoadsterRenderer;
-
-                }
-                else if (PlayerPrefs.GetInt("CarModel") == 1)
-                {
-                    modelRenderer = kartClassicRenderer;
-                }
-                colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-                modelRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            }
-            if (PlayerPrefs.GetInt("HatModel") != null)
-            {
-                hatManager.AddHat(PlayerPrefs.GetInt("HatModel"));
-            }
-
-            if (PlayerPrefs.GetString("PlayerColor") != null)
-            {
-                if (PlayerPrefs.GetInt("CarModel") == 0)
-                {
-                    modelRenderer = playerRoadsterRenderer;
-                    
-                }
-                else if (PlayerPrefs.GetInt("CarModel") == 1)
-                {
-                    modelRenderer = playerClassicRenderer;
-                }                
-                colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
-                modelRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
-            }
         }
     }
 }
