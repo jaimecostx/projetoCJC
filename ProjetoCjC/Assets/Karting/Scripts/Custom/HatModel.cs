@@ -13,6 +13,8 @@ namespace Game{
         public GameObject roadsterHeadEND;
         GameObject headEND;
         GameObject hatInstance;
+
+        public int inGame; 
         
         /// <summary>
         /// The Start method is called when the script instance is being initialized.
@@ -20,16 +22,18 @@ namespace Game{
         /// </summary>
         void Start()
         {
-            
-            headEND = roadsterHeadEND;
-            Debug.Log("HatMode.cs - Start()");
-            if (PlayerPrefs.GetInt("CarModel") == 0)
+            if (inGame == 0)
             {
                 headEND = roadsterHeadEND;
-            }
-            else if (PlayerPrefs.GetInt("CarModel") == 1)
-            {
-                headEND = classicHeadEND;
+                Debug.Log("HatMode.cs - Start()");
+                if (PlayerPrefs.GetInt("CarModel") == 0)
+                {
+                    headEND = roadsterHeadEND;
+                }
+                else if (PlayerPrefs.GetInt("CarModel") == 1)
+                {
+                    headEND = classicHeadEND;
+                }
             }
         }
 
@@ -82,6 +86,16 @@ namespace Game{
             hatInstance.transform.rotation = headEND.transform.rotation;
             hatInstance.transform.localScale = new Vector3(2f, 2f, 2f);
             hatInstance.transform.SetParent(headEND.transform);
+        }
+
+        public void AddHatGame(int hatIndex, GameObject headENd)
+        {
+            Debug.Log( hatIndex + " " + headENd.ToString());
+            hatInstance = Instantiate(hatPrefabs[hatIndex]);
+            hatInstance.transform.position = headENd.transform.position;
+            hatInstance.transform.rotation = headENd.transform.rotation;
+            hatInstance.transform.localScale = new Vector3(1f, 1f, 1f);
+            hatInstance.transform.SetParent(headENd.transform);
         }
     }
 }

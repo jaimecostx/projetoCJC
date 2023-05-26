@@ -12,6 +12,7 @@ public class CarModel : MonoBehaviour
     public int currentCarIndex = 0;
     // Start is called before the first frame update
     public GameObject carModel;
+    
     void Start()
     {
         carPrefabs[currentCarIndex].SetActive(true);

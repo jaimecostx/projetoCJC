@@ -16,32 +16,43 @@ using Cinemachine;
 
 public class Kart : MonoBehaviour
 {
+    // 
     public string [] powerUps = {"Oil Slick", "Party Mode", "Ghost Mode"};
-    public string [] npcNames = {"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
+    public List<string> npcNames = new List<string>(){"Skippy", "Dash", "Rash", "Cash", "Soup", "Toup", "Nuns", "Vascz", "Backz"};
 
     public TextMeshProUGUI notification;
-    public string racerName;
-    public float powerUpTime = 5;
-
-    public int selectedPowerUp;
-    Renderer kartRenderer;
-    Renderer playerRenderer;
-    public int checkpointCounter;
-    GameObject lastCheckpoint;
-
-    public bool isPowerUpOn = false;
-
-    public float lastTime;
-    float timer;
-    Color kartDefaultColor;
-    Color playerDefaultColor;
     Color notificationDefaultColor;
     ArcadeKart kart;
 
-    public CarModel carSwitcher;
-    
+    // RACER
+    public string racerName;
+    Renderer kartRenderer;
+    Renderer playerRenderer;
+    Color kartDefaultColor;
+    Color playerDefaultColor;
+    GameObject headEND;
+    public float powerUpTime = 5;
+    public float defaultTopSpeed = 25f;
+    public float defaultAcceleration = 5f;
 
-    // Start is called before the first frame update
+    // GAMEMODE
+    public int selectedPowerUp;
+    public int checkpointCounter;
+    GameObject lastCheckpoint;
+    public float lastTime;
+    float timer;
+    public bool isPowerUpOn = false;
+
+    public HatModel hatModel;
+
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// Initializes the racer's information and registers it with the RaceController.
+    /// </summary>
+    /// <remarks>
+    /// This function is typically used in Unity's MonoBehaviour scripts.
+    /// It should be placed within the class body and executed during the object's awake phase.
+    /// </remarks>
     void Awake() 
     {
         if (gameObject.CompareTag("Player"))
@@ -56,20 +67,30 @@ public class Kart : MonoBehaviour
         }        
     }
 
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// Initializes the racer's information, including name and visual attributes.
+    /// </summary>
+    /// <remarks>
+    /// This function is typically used in Unity's MonoBehaviour scripts.
+    /// It should be placed within the class body and executed during the object's start phase.
+    /// </remarks>
     void Start()
     {
-        if (gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Player"))    // Kart Player
         {   
             racerName = PlayerPrefs.GetString("PlayerUsername");
             if (PlayerPrefs.GetInt("CarModel") == 0)
             {
                 kartRenderer = gameObject.transform.Find("KartBody/Roadster_Body/Roadster_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartBody/PlayerIdle/Template_Character").GetComponent<Renderer>();
+                headEND = gameObject.transform.Find("KartBody/PlayerIdle/Root1/Hips/Spine1/Spine2/Neck/Head/HeadEND").gameObject;
             }
             else if (PlayerPrefs.GetInt("CarModel") == 1)
             {
                 kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
+                headEND = gameObject.transform.Find("KartVisual/PlayerIdle/Root1/Hips/Spine1/Spine2/Neck/Head/HeadEND").gameObject;
             }
             string [] colorComponents;
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString("KartColor")))
@@ -82,18 +103,30 @@ public class Kart : MonoBehaviour
                 colorComponents = PlayerPrefs.GetString("PlayerColor").Replace("RGBA(", "").Replace(")", "").Split(',');
                 playerRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
             }  
+            if (PlayerPrefs.GetInt("HatModel") != null && headEND != null)
+            {
+                Debug.Log("INSIDE: " + headEND.ToString());
+                hatModel.AddHatGame(PlayerPrefs.GetInt("HatModel"), headEND);
+            }
         }
-        else if (gameObject.CompareTag("KartAI"))
+        else if (gameObject.CompareTag("KartAI"))   // Kart Agent
         {
-            racerName = npcNames[Random.Range(0, 9)];
-            kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
+            // Assign random name to Agent
+            racerName = npcNames[Random.Range(0, 9)];       
+            // Remove the name from List
+            npcNames.Remove(racerName);              
+            // Assign kartRenderer and playerRenderer to Agent       
+            kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();     
             playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
+            // Randomize kart and player color
             playerRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
             kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
         }
         kartDefaultColor = kartRenderer.material.color;
         playerDefaultColor = playerRenderer.material.color;
         kart = GetComponent<ArcadeKart>();
+        kart.baseStats.TopSpeed = defaultTopSpeed;
+        kart.baseStats.Acceleration = defaultAcceleration;
         notification.enabled = false; 
     }
     
@@ -104,26 +137,43 @@ public class Kart : MonoBehaviour
         timer += Time.deltaTime; 
     }
 
+    /// <summary>
+    /// Called when a collider enters the trigger zone of the current object.
+    /// Handles interactions with power-ups and checkpoints.
+    /// </summary>
+    /// <param name="other">The collider that entered the trigger zone.</param>
     private void OnTriggerEnter(Collider other)
     {
-        //notification.text = "ass";
-        if (other.CompareTag("PowerUp"))
+        if (other.CompareTag("PowerUp"))    // PowerUp
         {
-            Destroy(other.gameObject);
+            // Despawn caught powerUp gameObject
+            Destroy(other.gameObject);      
+            // Random Power Up Selection
             selectedPowerUp = Random.Range(0, 3);
-            Debug.Log("selectPowerup " + selectedPowerUp);
+            // Call to ActivatePowerUp Coroutine
             StartCoroutine(ActivatePowerUp());
         }
-        else if (other.CompareTag("Checkpoint"))
+        else if (other.CompareTag("Checkpoint"))    // Checkpoint
         {
-            if (other.gameObject != lastCheckpoint) {
-                lastCheckpoint = other.gameObject;
-                lastTime = timer;
-                checkpointCounter++;
-            }
+            // When kart starts driving back
+            if (other.gameObject == lastCheckpoint) {   
+                return;
+            } 
+            lastCheckpoint = other.gameObject;
+            lastTime = timer;
+            checkpointCounter++;
+        }
+        ArcadeKart otherKart = other.GetComponent<ArcadeKart>();
+        if (otherKart != null) 
+        {
+            otherKart.ChangeSpeed(6);
         }
     }
 
+    /// <summary>
+    /// Coroutine to activate the selected power-up.
+    /// </summary>
+    /// <returns>An IEnumerator used for coroutine execution.</returns>
     IEnumerator ActivatePowerUp()
     {
         notification.enabled = true;
@@ -182,14 +232,16 @@ public class Kart : MonoBehaviour
         }
         notification.text = "";
     }
-        void displayDebug()
-        {
-            Debug.LogWarning("====================================================");
-            Debug.LogWarning("Username: " + PlayerPrefs.GetString("PlayerUsername"));
-            Debug.LogWarning("PColor: " + PlayerPrefs.GetString("PlayerColor"));
-            Debug.LogWarning("CModel: " + PlayerPrefs.GetInt("CarModel"));
-            Debug.LogWarning("CColor: " + PlayerPrefs.GetString("KartColor"));
-            Debug.LogWarning("HModel: " + PlayerPrefs.GetInt("HatModel"));
-            Debug.LogWarning("====================================================");
-        }
+
+    void displayDebug()
+    {
+        Debug.LogWarning("====================================================");
+        Debug.LogWarning("Username: " + PlayerPrefs.GetString("PlayerUsername"));
+        Debug.LogWarning("PColor: " + PlayerPrefs.GetString("PlayerColor"));
+        Debug.LogWarning("CModel: " + PlayerPrefs.GetInt("CarModel"));
+        Debug.LogWarning("CColor: " + PlayerPrefs.GetString("KartColor"));
+        Debug.LogWarning("HModel: " + PlayerPrefs.GetInt("HatModel"));
+        Debug.LogWarning("====================================================");
+    }
+
 }

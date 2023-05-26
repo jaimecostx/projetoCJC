@@ -1,3 +1,5 @@
+using System.Net.Cache;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Collections;
@@ -5,9 +7,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
-
+using Game;
 public class Instantiate : MonoBehaviour
 {
+    public HatModel hatScript;
     public GameObject kartClassic;
     public GameObject kartRoadster;
     public TextMeshProUGUI notification;
@@ -34,6 +37,7 @@ public class Instantiate : MonoBehaviour
             // Add the Kart Script component to the kart object
             player = kart.AddComponent<Kart>();
             player.notification = notification;
+            player.hatModel = hatScript;
         }
         else
         {
@@ -43,8 +47,8 @@ public class Instantiate : MonoBehaviour
             camera.LookAt = kart.transform.Find("KartBouncingCapsule");
             player = kart.AddComponent<Kart>();
             player.notification = notification;
+            player.hatModel = hatScript;
         }
-
     }
 
     void Update()

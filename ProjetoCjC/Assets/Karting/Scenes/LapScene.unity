@@ -4024,6 +4024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2042733062417270268, guid: 993d2f3ed51454869af0023769df26ed,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042733062417270268, guid: 993d2f3ed51454869af0023769df26ed,
+        type: 3}
       propertyPath: m_Intensity
       value: 1
       objectReference: {fileID: 0}
@@ -10520,7 +10525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -470.38498, y: -270}
+  m_AnchoredPosition: {x: -100, y: -650}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036584282
@@ -10770,7 +10775,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sd
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10797,7 +10802,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 32
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12917,6 +12922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305926804}
   - component: {fileID: 1305926805}
+  - component: {fileID: 1305926806}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -12957,6 +12963,25 @@ MonoBehaviour:
     type: 3}
   notification: {fileID: 1108712494}
   camera: {fileID: 1124594021}
+--- !u!114 &1305926806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305926803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69308cf2576061d468297c39cda43eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatPrefabs:
+  - {fileID: 9055817469080827956, guid: 332a6a14085b74fdd9c8f81357a61185, type: 3}
+  - {fileID: 2394185961606616943, guid: 774a4248793f3461bb91a4fe8170cdd7, type: 3}
+  - {fileID: 2805368771174309307, guid: 942c2c1bb4e544cb09d3494e89bb8041, type: 3}
+  currentHatIndex: 1
+  classicHeadEND: {fileID: 0}
+  roadsterHeadEND: {fileID: 0}
 --- !u!1001 &1311427662
 PrefabInstance:
   m_ObjectHideFlags: 0
