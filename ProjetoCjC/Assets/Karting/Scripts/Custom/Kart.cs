@@ -39,6 +39,7 @@ public class Kart : MonoBehaviour
     public int selectedPowerUp;
     public int checkpointCounter;
     GameObject lastCheckpoint;
+    public GameObject powerupFx;
     public float lastTime;
     float timer;
     public bool isPowerUpOn = false;
@@ -146,6 +147,10 @@ public class Kart : MonoBehaviour
     {
         if (other.CompareTag("PowerUp"))    // PowerUp
         {
+            Debug.Log(powerupFx); // NAO FUNFA
+            Debug.Log(transform.position.ToString());
+            Debug.Log(Quaternion.identity.ToString());
+            GameObject powerup = Instantiate(powerupFx, transform.position, Quaternion.identity);
             // Despawn caught powerUp gameObject
             Destroy(other.gameObject);      
             // Random Power Up Selection
@@ -166,7 +171,7 @@ public class Kart : MonoBehaviour
         ArcadeKart otherKart = other.GetComponent<ArcadeKart>();
         if (otherKart != null) 
         {
-            otherKart.ChangeSpeed(6);
+            otherKart.ChangeSpeed(5);
         }
     }
 
@@ -175,7 +180,8 @@ public class Kart : MonoBehaviour
     /// </summary>
     /// <returns>An IEnumerator used for coroutine execution.</returns>
     IEnumerator ActivatePowerUp()
-    {
+    {   
+
         notification.enabled = true;
         notification.text = powerUps[selectedPowerUp];
         float powerUpTimer = 0;
@@ -215,12 +221,26 @@ public class Kart : MonoBehaviour
             case 2: // Ghost Mode
                 Debug.Log("Ghost Mode");
                 isPowerUpOn = true;
+                Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
                 while (powerUpTimer <= powerUpTime)
                 {
                     powerUpTimer +=0.1f;
                     kartRenderer.material.color = new Color(kartRenderer.material.color.r, kartRenderer.material.color.g, kartRenderer.material.color.b, 0.1f );
                     playerRenderer.material.color = new Color(playerRenderer.material.color.r,playerRenderer.material.color.g, playerRenderer.material.color.b, 0.1f);
+                    
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.gameObject.layer == 13)
+                        {
+                            collider.enabled = false;
+                        }
+                    }
+                    
                     yield return new WaitForSeconds(0.1f);
+                }
+                foreach (Collider collider in colliders)
+                {
+                    collider.enabled = true;
                 }
                 kartRenderer.material.color = kartDefaultColor;
                 playerRenderer.material.color = playerDefaultColor;

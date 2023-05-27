@@ -13,6 +13,7 @@ public class Instantiate : MonoBehaviour
     public HatModel hatScript;
     public GameObject kartClassic;
     public GameObject kartRoadster;
+    public GameObject powerUpFx;
     public TextMeshProUGUI notification;
     Kart player;
     public CinemachineVirtualCamera camera;
@@ -29,7 +30,10 @@ public class Instantiate : MonoBehaviour
         {
             // Instantiate the kartRoadster prefab at a specific position and rotation
             kart = Instantiate(kartRoadster, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
+            // Set the scale to 0.88
+            kart.transform.localScale = new Vector3(0.88f, 0.88f, 0.88f); 
             kart.tag = "Player";
+            kart.layer = 13;
             // Set the camera to follow the kart's transform
             camera.Follow = kart.transform;
             // Set the camera to look at the KartBouncingCapsule child object within the kart
@@ -38,16 +42,19 @@ public class Instantiate : MonoBehaviour
             player = kart.AddComponent<Kart>();
             player.notification = notification;
             player.hatModel = hatScript;
+            player.powerupFx = powerUpFx;
         }
         else
         {
             kart = Instantiate(kartClassic, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
             kart.tag = "Player";
+            kart.layer = 13;
             camera.Follow = kart.transform;
             camera.LookAt = kart.transform.Find("KartBouncingCapsule");
             player = kart.AddComponent<Kart>();
             player.notification = notification;
             player.hatModel = hatScript;
+            player.powerupFx = powerUpFx;
         }
     }
 

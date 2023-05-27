@@ -12957,6 +12957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2519cb6ba77b1a4992caebeb365e1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatScript: {fileID: 1305926806}
   kartClassic: {fileID: 4810912518991602691, guid: 19954de30401f73428254541a9ad156e,
     type: 3}
   kartRoadster: {fileID: 188030281043199902, guid: 66030baed8e969a45a0d327d35c432c3,
@@ -12979,9 +12980,10 @@ MonoBehaviour:
   - {fileID: 9055817469080827956, guid: 332a6a14085b74fdd9c8f81357a61185, type: 3}
   - {fileID: 2394185961606616943, guid: 774a4248793f3461bb91a4fe8170cdd7, type: 3}
   - {fileID: 2805368771174309307, guid: 942c2c1bb4e544cb09d3494e89bb8041, type: 3}
-  currentHatIndex: 1
+  currentHatIndex: 0
   classicHeadEND: {fileID: 0}
   roadsterHeadEND: {fileID: 0}
+  inGame: 1
 --- !u!1001 &1311427662
 PrefabInstance:
   m_ObjectHideFlags: 0
