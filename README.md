@@ -1,3 +1,9 @@
-Nuno Amaro - 41173
-Vasco Oliveira - 41209
-Jaime Costa - 41181
+# HorizonDRIFT
+### Projeto CjC
+---
+<p>Jaime Costa - 41181</p>
+<p>Nuno Amaro - 41173</p>
+<p>Vasco Oliveira - 41209</p>
+
+![one_sheet](https://github.com/jaimecostx/projetoCJC/assets/77791259/5e68af6f-b8f7-4d8e-bcf6-f0714fc97390)
+
