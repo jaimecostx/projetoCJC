@@ -81,13 +81,16 @@ public class Kart : MonoBehaviour
         if (gameObject.CompareTag("Player"))    // Kart Player
         {   
             racerName = PlayerPrefs.GetString("PlayerUsername");
-            if (PlayerPrefs.GetInt("CarModel") == 0)
-            {
+            if (PlayerPrefs.GetInt("CarModel") == 0)    // Car Model is Roadster
+            {   
+                // Assign Kart Roadster Renderer
                 kartRenderer = gameObject.transform.Find("KartBody/Roadster_Body/Roadster_Body").GetComponent<Renderer>();
+                // Assign Player Roadster Renderer
                 playerRenderer = gameObject.transform.Find("KartBody/PlayerIdle/Template_Character").GetComponent<Renderer>();
+                // Assign Player Roadster HeadEND Renderer
                 headEND = gameObject.transform.Find("KartBody/PlayerIdle/Root1/Hips/Spine1/Spine2/Neck/Head/HeadEND").gameObject;
             }
-            else if (PlayerPrefs.GetInt("CarModel") == 1)
+            else if (PlayerPrefs.GetInt("CarModel") == 1)       // Car Model is Kart
             {
                 kartRenderer = gameObject.transform.Find("KartVisual/Kart/Kart_Body").GetComponent<Renderer>();
                 playerRenderer = gameObject.transform.Find("KartVisual/PlayerIdle/Template_Character").GetComponent<Renderer>();
@@ -96,7 +99,9 @@ public class Kart : MonoBehaviour
             string [] colorComponents;
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString("KartColor")))
             {
+                // Get Color from PlayerPrefs 
                 colorComponents = PlayerPrefs.GetString("KartColor").Replace("RGBA(", "").Replace(")", "").Split(',');
+                // Assign Color to kartRenderer
                 kartRenderer.material.color = new Color(float.Parse(colorComponents[0]), float.Parse(colorComponents[1]), float.Parse(colorComponents[2]), float.Parse(colorComponents[3]));
             }
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString("PlayerColor")))
@@ -106,7 +111,7 @@ public class Kart : MonoBehaviour
             }  
             if (PlayerPrefs.GetInt("HatModel") != null && headEND != null)
             {
-                Debug.Log("INSIDE: " + headEND.ToString());
+                // Add Hat to headEND
                 hatModel.AddHatGame(PlayerPrefs.GetInt("HatModel"), headEND);
             }
         }
@@ -181,7 +186,6 @@ public class Kart : MonoBehaviour
     /// <returns>An IEnumerator used for coroutine execution.</returns>
     IEnumerator ActivatePowerUp()
     {   
-
         notification.enabled = true;
         notification.text = powerUps[selectedPowerUp];
         float powerUpTimer = 0;

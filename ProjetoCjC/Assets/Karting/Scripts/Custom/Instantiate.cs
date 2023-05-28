@@ -29,7 +29,7 @@ public class Instantiate : MonoBehaviour
         if (PlayerPrefs.GetInt("CarModel") == 0)
         {
             // Instantiate the kartRoadster prefab at a specific position and rotation
-            kart = Instantiate(kartRoadster, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
+            kart = Instantiate(kartRoadster, new Vector3(13.5f, 2f, 5f), Quaternion.identity);
             // Set the scale to 0.88
             kart.transform.localScale = new Vector3(0.88f, 0.88f, 0.88f); 
             kart.tag = "Player";
@@ -46,7 +46,7 @@ public class Instantiate : MonoBehaviour
         }
         else
         {
-            kart = Instantiate(kartClassic, new Vector3(13.5f, 0.25f, 5f), Quaternion.identity);
+            kart = Instantiate(kartClassic, new Vector3(13.5f, 2f, 5f), Quaternion.identity);
             kart.tag = "Player";
             kart.layer = 13;
             camera.Follow = kart.transform;
