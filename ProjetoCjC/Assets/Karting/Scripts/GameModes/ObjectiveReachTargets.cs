@@ -72,6 +72,7 @@ public class ObjectiveReachTargets : Objective
 
     public override string GetUpdatedCounterAmount()
     {
+        Debug.Log(m_PickupTotal + " / " + pickupsToCompleteObjective);
         return m_PickupTotal + " / " + pickupsToCompleteObjective;
     }
     

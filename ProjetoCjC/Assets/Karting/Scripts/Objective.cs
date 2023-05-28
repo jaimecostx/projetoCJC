@@ -57,6 +57,8 @@ public abstract class Objective : MonoBehaviour
     
     public int NumberOfActivePickupsRemaining()
     {
+        
+
         int total = 0;
         for (int i = 0; i < Pickups.Count; i++)
         {
@@ -116,13 +118,19 @@ public abstract class Objective : MonoBehaviour
         if (pickup.gameMode != gameMode) return;
 
         Pickups.Add(pickup);
-
         NumberOfPickupsTotal++;
+        
     }
 
     public void UnregisterPickup(TargetObject pickupCollected)
     {
         if (pickupCollected.gameMode != gameMode) return;
+
+        if (pickupCollected.gameMode == GameMode.Crash){
+            GameObject objectWithTag = GameObject.FindGameObjectWithTag("CrashController");
+            CrashController crashControl = objectWithTag.GetComponent<CrashController>();
+            crashControl.spawnObject();
+        }
 
         // removes the pickup from the list, so that we can keep track of how many are left on the map
         if (pickupCollected.gameMode == GameMode.Laps)

@@ -9,6 +9,8 @@ TagManager:
   - KartAI
   - Checkpoint
   - CHMenu
+  - pin
+  - CrashController
   layers:
   - Default
   - TransparentFX
