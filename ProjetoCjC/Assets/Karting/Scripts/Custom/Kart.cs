@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.IO;
@@ -46,6 +47,8 @@ public class Kart : MonoBehaviour
 
     public HatModel hatModel;
 
+    Vector3 startPosition;
+
     /// <summary>
     /// Called when the script instance is being loaded.
     /// Initializes the racer's information and registers it with the RaceController.
@@ -56,6 +59,7 @@ public class Kart : MonoBehaviour
     /// </remarks>
     void Awake() 
     {
+        startPosition = new Vector3(13.5f, 2f, 5f);
         if (gameObject.CompareTag("Player"))
         {
             racerName = PlayerPrefs.GetString("PlayerUsername");
@@ -141,6 +145,33 @@ public class Kart : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime; 
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Debug.Log("inside");
+            gameObject.transform.position = startPosition;
+            gameObject.transform.rotation = Quaternion.identity;
+            kart.ChangeSpeed(0);
+            selectedPowerUp = 2;
+            StartCoroutine(ActivatePowerUp());
+
+        }
+        /*
+        Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Wheels"))
+            {       
+            Debug.Log("Collided with wheel on layer: " + collider.gameObject.layer);
+            if (collider.gameObject.layer == 13)
+            {
+                Debug.Log("Wheel collided with layer 9.");
+                gameObject.transform.position = startPosition;
+            }}
+        }
+        */
+        
+
     }
 
     /// <summary>
