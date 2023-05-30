@@ -19,8 +19,8 @@ public class CrashObject : TargetObject
 
     void Start()
     {
-        m_rigid = GetComponent<Rigidbody>();
-        m_rigid.centerOfMass = centerOfMass;
+        //m_rigid = GetComponent<Rigidbody>();
+        //m_rigid.centerOfMass = centerOfMass;
         Register();
     }
 

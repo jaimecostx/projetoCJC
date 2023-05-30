@@ -146,7 +146,7 @@ public class Kart : MonoBehaviour
     {
         timer += Time.deltaTime; 
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Backspace))
         {
             Debug.Log("inside");
             gameObject.transform.position = startPosition;
