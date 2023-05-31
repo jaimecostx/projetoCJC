@@ -148,13 +148,14 @@ public class Kart : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Backspace))
         {
-            Debug.Log("inside");
-            gameObject.transform.position = startPosition;
-            gameObject.transform.rotation = Quaternion.identity;
-            kart.ChangeSpeed(0);
-            selectedPowerUp = 2;
-            StartCoroutine(ActivatePowerUp());
-
+            if (gameObject.CompareTag("Player")){
+                Debug.Log("inside");
+                gameObject.transform.position = startPosition;
+                gameObject.transform.rotation = Quaternion.identity;
+                kart.ChangeSpeed(0);
+                selectedPowerUp = 2;
+                StartCoroutine(ActivatePowerUp());
+            }
         }
         /*
         Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
@@ -188,7 +189,7 @@ public class Kart : MonoBehaviour
             Debug.Log(Quaternion.identity.ToString());
             GameObject powerup = Instantiate(powerupFx, transform.position, Quaternion.identity);
             // Despawn caught powerUp gameObject
-            Destroy(other.gameObject);      
+            // Destroy(other.gameObject);      
             // Random Power Up Selection
             selectedPowerUp = Random.Range(0, 3);
             // Call to ActivatePowerUp Coroutine
@@ -209,6 +210,7 @@ public class Kart : MonoBehaviour
         {
             otherKart.ChangeSpeed(5);
         }
+        
     }
 
     /// <summary>
@@ -247,7 +249,8 @@ public class Kart : MonoBehaviour
                 {
                     powerUpTimer +=0.1f;
                     kartRenderer.material.color = new Color(Random.Range(0f, 1f),Random.Range(0f, 1f),Random.Range(0f, 1f));
-
+                    kart.baseStats.Acceleration = 7f;
+                    kart.baseStats.TopSpeed = 30f;
                     yield return new WaitForSeconds(0.1f); 
                 }
                 kartRenderer.material.color = kartDefaultColor;
